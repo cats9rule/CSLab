@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ListaVozaca", "ListaVozaca\ListaVozaca.csproj", "{90F4648B-D2EF-4EAA-B842-D0C50A98829B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Podaci", "Podaci\Podaci.csproj", "{B74A2B7E-06C7-4C38-BE76-674564FBDA68}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extensions", "Extensions\Extensions.csproj", "{13E58167-9301-44AF-96C5-43123EB29F40}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{90F4648B-D2EF-4EAA-B842-D0C50A98829B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90F4648B-D2EF-4EAA-B842-D0C50A98829B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90F4648B-D2EF-4EAA-B842-D0C50A98829B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90F4648B-D2EF-4EAA-B842-D0C50A98829B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B74A2B7E-06C7-4C38-BE76-674564FBDA68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B74A2B7E-06C7-4C38-BE76-674564FBDA68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B74A2B7E-06C7-4C38-BE76-674564FBDA68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B74A2B7E-06C7-4C38-BE76-674564FBDA68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13E58167-9301-44AF-96C5-43123EB29F40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13E58167-9301-44AF-96C5-43123EB29F40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13E58167-9301-44AF-96C5-43123EB29F40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13E58167-9301-44AF-96C5-43123EB29F40}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6C5DC56B-338E-4C77-B070-FAE8618A2799}
+	EndGlobalSection
+EndGlobal
