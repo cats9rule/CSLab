@@ -39,11 +39,11 @@ namespace ListaVozaca
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.cbPol = new System.Windows.Forms.ComboBox();
+            this.tbMesto = new System.Windows.Forms.TextBox();
+            this.tbBrVozacke = new System.Windows.Forms.TextBox();
+            this.dtpDozvolaDo = new System.Windows.Forms.DateTimePicker();
+            this.dtpDozvolaOd = new System.Windows.Forms.DateTimePicker();
             this.dtpDatumRodj = new System.Windows.Forms.DateTimePicker();
             this.tbPrezime = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -77,11 +77,11 @@ namespace ListaVozaca
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.comboBox1);
-            this.groupBox1.Controls.Add(this.textBox2);
-            this.groupBox1.Controls.Add(this.textBox1);
-            this.groupBox1.Controls.Add(this.dateTimePicker2);
-            this.groupBox1.Controls.Add(this.dateTimePicker1);
+            this.groupBox1.Controls.Add(this.cbPol);
+            this.groupBox1.Controls.Add(this.tbMesto);
+            this.groupBox1.Controls.Add(this.tbBrVozacke);
+            this.groupBox1.Controls.Add(this.dtpDozvolaDo);
+            this.groupBox1.Controls.Add(this.dtpDozvolaOd);
             this.groupBox1.Controls.Add(this.dtpDatumRodj);
             this.groupBox1.Controls.Add(this.tbPrezime);
             this.groupBox1.Controls.Add(this.label1);
@@ -101,6 +101,7 @@ namespace ListaVozaca
             this.btnDodajSliku.TabIndex = 8;
             this.btnDodajSliku.Text = "Dodaj sliku";
             this.btnDodajSliku.UseVisualStyleBackColor = true;
+            this.btnDodajSliku.Click += new System.EventHandler(this.btnDodajSliku_Click);
             // 
             // picBoxLicna
             // 
@@ -173,49 +174,51 @@ namespace ListaVozaca
             this.label2.TabIndex = 9;
             this.label2.Text = "Prezime: ";
             // 
-            // comboBox1
+            // cbPol
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.cbPol.FormattingEnabled = true;
+            this.cbPol.Items.AddRange(new object[] {
             "Z",
             "M",
             "Drugo"});
-            this.comboBox1.Location = new System.Drawing.Point(158, 204);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(100, 21);
-            this.comboBox1.TabIndex = 7;
+            this.cbPol.Location = new System.Drawing.Point(158, 204);
+            this.cbPol.Name = "cbPol";
+            this.cbPol.Size = new System.Drawing.Size(100, 21);
+            this.cbPol.TabIndex = 7;
             // 
-            // textBox2
+            // tbMesto
             // 
-            this.textBox2.Location = new System.Drawing.Point(158, 177);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 6;
+            this.tbMesto.Location = new System.Drawing.Point(158, 177);
+            this.tbMesto.Name = "tbMesto";
+            this.tbMesto.Size = new System.Drawing.Size(100, 20);
+            this.tbMesto.TabIndex = 6;
+            this.tbMesto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbMesto_KeyPress);
             // 
-            // textBox1
+            // tbBrVozacke
             // 
-            this.textBox1.Location = new System.Drawing.Point(158, 151);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 5;
+            this.tbBrVozacke.Location = new System.Drawing.Point(158, 151);
+            this.tbBrVozacke.Name = "tbBrVozacke";
+            this.tbBrVozacke.Size = new System.Drawing.Size(100, 20);
+            this.tbBrVozacke.TabIndex = 5;
+            this.tbBrVozacke.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbBrVozacke_KeyPress);
             // 
-            // dateTimePicker2
+            // dtpDozvolaDo
             // 
-            this.dateTimePicker2.CustomFormat = "dd.MM.yyyy.";
-            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker2.Location = new System.Drawing.Point(158, 125);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(100, 20);
-            this.dateTimePicker2.TabIndex = 4;
+            this.dtpDozvolaDo.CustomFormat = "dd.MM.yyyy.";
+            this.dtpDozvolaDo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpDozvolaDo.Location = new System.Drawing.Point(158, 125);
+            this.dtpDozvolaDo.Name = "dtpDozvolaDo";
+            this.dtpDozvolaDo.Size = new System.Drawing.Size(100, 20);
+            this.dtpDozvolaDo.TabIndex = 4;
             // 
-            // dateTimePicker1
+            // dtpDozvolaOd
             // 
-            this.dateTimePicker1.CustomFormat = "dd.MM.yyyy.";
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker1.Location = new System.Drawing.Point(158, 99);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(100, 20);
-            this.dateTimePicker1.TabIndex = 3;
+            this.dtpDozvolaOd.CustomFormat = "dd.MM.yyyy.";
+            this.dtpDozvolaOd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpDozvolaOd.Location = new System.Drawing.Point(158, 99);
+            this.dtpDozvolaOd.Name = "dtpDozvolaOd";
+            this.dtpDozvolaOd.Size = new System.Drawing.Size(100, 20);
+            this.dtpDozvolaOd.TabIndex = 3;
             // 
             // dtpDatumRodj
             // 
@@ -232,6 +235,7 @@ namespace ListaVozaca
             this.tbPrezime.Name = "tbPrezime";
             this.tbPrezime.Size = new System.Drawing.Size(100, 20);
             this.tbPrezime.TabIndex = 1;
+            this.tbPrezime.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPrezime_KeyPress);
             // 
             // label1
             // 
@@ -248,6 +252,7 @@ namespace ListaVozaca
             this.tbIme.Name = "tbIme";
             this.tbIme.Size = new System.Drawing.Size(100, 20);
             this.tbIme.TabIndex = 0;
+            this.tbIme.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbIme_KeyPress);
             // 
             // groupBox2
             // 
@@ -269,6 +274,7 @@ namespace ListaVozaca
             this.btnObrisiKategoriju.TabIndex = 2;
             this.btnObrisiKategoriju.Text = "Obrisi kategoriju";
             this.btnObrisiKategoriju.UseVisualStyleBackColor = true;
+            this.btnObrisiKategoriju.Click += new System.EventHandler(this.btnObrisiKategoriju_Click);
             // 
             // btnDodajKategoriju
             // 
@@ -278,6 +284,7 @@ namespace ListaVozaca
             this.btnDodajKategoriju.TabIndex = 1;
             this.btnDodajKategoriju.Text = "Dodaj novu kategoriju";
             this.btnDodajKategoriju.UseVisualStyleBackColor = true;
+            this.btnDodajKategoriju.Click += new System.EventHandler(this.btnDodajKategoriju_Click);
             // 
             // dgvKategorije
             // 
@@ -287,6 +294,7 @@ namespace ListaVozaca
             this.dgvKategorije.Name = "dgvKategorije";
             this.dgvKategorije.Size = new System.Drawing.Size(446, 116);
             this.dgvKategorije.TabIndex = 0;
+            this.dgvKategorije.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvKategorije_CellClick);
             // 
             // groupBox3
             // 
@@ -308,6 +316,7 @@ namespace ListaVozaca
             this.btnObrisiZabranu.TabIndex = 2;
             this.btnObrisiZabranu.Text = "Obrisi zabranu";
             this.btnObrisiZabranu.UseVisualStyleBackColor = true;
+            this.btnObrisiZabranu.Click += new System.EventHandler(this.btnObrisiZabranu_Click);
             // 
             // btnDodajZabranu
             // 
@@ -317,6 +326,7 @@ namespace ListaVozaca
             this.btnDodajZabranu.TabIndex = 1;
             this.btnDodajZabranu.Text = "Dodaj novu zabranu";
             this.btnDodajZabranu.UseVisualStyleBackColor = true;
+            this.btnDodajZabranu.Click += new System.EventHandler(this.btnDodajZabranu_Click);
             // 
             // dgvZabrane
             // 
@@ -326,6 +336,7 @@ namespace ListaVozaca
             this.dgvZabrane.Name = "dgvZabrane";
             this.dgvZabrane.Size = new System.Drawing.Size(446, 116);
             this.dgvZabrane.TabIndex = 0;
+            this.dgvZabrane.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvZabrane_CellClick);
             // 
             // btnProsledi
             // 
@@ -335,6 +346,7 @@ namespace ListaVozaca
             this.btnProsledi.TabIndex = 3;
             this.btnProsledi.Text = "Prosledi";
             this.btnProsledi.UseVisualStyleBackColor = true;
+            this.btnProsledi.Click += new System.EventHandler(this.btnProsledi_Click);
             // 
             // btnZatvori
             // 
@@ -344,6 +356,7 @@ namespace ListaVozaca
             this.btnZatvori.TabIndex = 4;
             this.btnZatvori.Text = "Zatvori";
             this.btnZatvori.UseVisualStyleBackColor = true;
+            this.btnZatvori.Click += new System.EventHandler(this.btnZatvori_Click);
             // 
             // Vozac
             // 
@@ -361,6 +374,7 @@ namespace ListaVozaca
             this.MinimumSize = new System.Drawing.Size(500, 780);
             this.Name = "Vozac";
             this.Text = "Vozac";
+            this.Load += new System.EventHandler(this.Vozac_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBoxLicna)).EndInit();
@@ -376,11 +390,11 @@ namespace ListaVozaca
 
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.ComboBox cbPol;
+        private System.Windows.Forms.TextBox tbMesto;
+        private System.Windows.Forms.TextBox tbBrVozacke;
+        private System.Windows.Forms.DateTimePicker dtpDozvolaDo;
+        private System.Windows.Forms.DateTimePicker dtpDozvolaOd;
         private System.Windows.Forms.DateTimePicker dtpDatumRodj;
         private System.Windows.Forms.TextBox tbPrezime;
         private System.Windows.Forms.Label label1;

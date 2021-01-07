@@ -24,7 +24,7 @@ namespace ListaVozaca
         {
             InitializeComponent();
         }
-        public Kategorija(List<Podaci.Kategorija> poseduje) : this()
+        public Kategorija(ref List<Podaci.Kategorija> poseduje) : this()
         {
             ImaDozvole = poseduje;
         }

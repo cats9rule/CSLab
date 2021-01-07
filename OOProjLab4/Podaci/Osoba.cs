@@ -17,18 +17,38 @@ namespace Podaci
         private string _brVozacke;
         private string _mestoIzdavanja;
         private DateTime _vazenjeOd, _vazenjeDo;
-        private char _pol;
+        private string _pol;
         private string _slikaPath;
 
-        private List<Kategorija> dozvole;
-        private List<Zabrana> zabrane;
+        public List<Kategorija> dozvole;
+        public List<Zabrana> zabrane;
 
         #endregion
 
         #region Properties
 
-        public string Ime { get; set; }
-        public string Prezime { get; set; }
+        public string Ime 
+        {
+            get
+            {
+                return _ime;
+            }
+            set
+            {
+                _ime = value;
+            }
+        }
+        public string Prezime 
+        {
+            get
+            {
+                return _prezime;
+            }
+            set
+            {
+                _prezime = value;
+            }
+        }
 
         [Browsable(false)]
         public DateTime Rodjendan
@@ -47,7 +67,17 @@ namespace Podaci
         }
 
         [DisplayName("Broj vozacke dozvole")]
-        public string BrVozacke { get; set; }
+        public string BrVozacke
+        {
+            get
+            {
+                return _brVozacke;
+            }
+            set
+            {
+                _brVozacke = value;
+            }
+        }
         [Browsable(false)]
         public string MestoIzdavanja { get; set; }
         [Browsable(false)]
@@ -76,12 +106,12 @@ namespace Podaci
             {
                 if (value.Date > _vazenjeOd)
                 {
-                    _vazenjeOd = value;
+                    _vazenjeDo = value;
                 }
             }
         }
         [Browsable(false)]
-        public char Pol
+        public string Pol
         {
             get
             {
@@ -89,9 +119,9 @@ namespace Podaci
             }
             set
             {
-                if(value!='M' && value!='Z')
+                if(value!="M" && value!="Z")
                 {
-                    _pol = 'D';
+                    _pol = "D";
                 }
                 else
                 {
@@ -128,8 +158,13 @@ namespace Podaci
 
         #region Constructors
 
-        public Osoba() { }
-        public Osoba(string i, string p, DateTime r, string brVoz, string mesto, DateTime od, DateTime doo, char pol, string path)
+        public Osoba() 
+        {
+            dozvole = new List<Kategorija>();
+            zabrane = new List<Zabrana>();
+        }
+        public Osoba(string i, string p, DateTime r, string brVoz, string mesto, 
+            DateTime od, DateTime doo, string pol, string path)
         {
             _ime = i;
             _prezime = p;
@@ -161,7 +196,8 @@ namespace Podaci
                 return false;
             }
         }
-        public void Update(string i, string p, DateTime r, string brVoz, string mesto, DateTime od, DateTime doo, char pol)
+        public void Update(string i, string p, DateTime r, string brVoz, string mesto, 
+            DateTime od, DateTime doo, string pol)
         {
             _ime = i;
             _prezime = p;

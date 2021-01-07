@@ -34,7 +34,7 @@ namespace ListaVozaca
             InitializeComponent();
         }
 
-        public Zabrana(List<Podaci.Kategorija> poseduje, List<Podaci.Zabrana> zabranjeno) : this()
+        public Zabrana(ref List<Podaci.Kategorija> poseduje, ref List<Podaci.Zabrana> zabranjeno) : this()
         {
             ImaDozvole = poseduje;
             ImaZabrane = zabranjeno;

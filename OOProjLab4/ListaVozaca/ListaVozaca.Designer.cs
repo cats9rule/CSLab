@@ -94,6 +94,7 @@ namespace ListaVozaca
             this.btnObrisi.TabIndex = 3;
             this.btnObrisi.Text = "Obrisi vozaca";
             this.btnObrisi.UseVisualStyleBackColor = true;
+            this.btnObrisi.Click += new System.EventHandler(this.btnObrisi_Click);
             // 
             // btnIzmeni
             // 
@@ -103,6 +104,7 @@ namespace ListaVozaca
             this.btnIzmeni.TabIndex = 2;
             this.btnIzmeni.Text = "Izmeni vozaca";
             this.btnIzmeni.UseVisualStyleBackColor = true;
+            this.btnIzmeni.Click += new System.EventHandler(this.btnIzmeni_Click);
             // 
             // btnDodaj
             // 
@@ -112,6 +114,7 @@ namespace ListaVozaca
             this.btnDodaj.TabIndex = 1;
             this.btnDodaj.Text = "Dodaj vozaca";
             this.btnDodaj.UseVisualStyleBackColor = true;
+            this.btnDodaj.Click += new System.EventHandler(this.btnDodaj_Click);
             // 
             // dgvVozaci
             // 
@@ -124,10 +127,12 @@ namespace ListaVozaca
             this.dgvVozaci.ReadOnly = true;
             this.dgvVozaci.Size = new System.Drawing.Size(545, 237);
             this.dgvVozaci.TabIndex = 0;
+            this.dgvVozaci.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvVozaci_CellClick);
             // 
             // tmrVreme
             // 
             this.tmrVreme.Interval = 1000;
+            this.tmrVreme.Tick += new System.EventHandler(this.tmrVreme_Tick);
             // 
             // ListaVozaca
             // 
@@ -144,6 +149,7 @@ namespace ListaVozaca
             this.MinimumSize = new System.Drawing.Size(600, 400);
             this.Name = "ListaVozaca";
             this.Text = "Lista vozaca";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ListaVozaca_FormClosing);
             this.Load += new System.EventHandler(this.ListaVozaca_Load);
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvVozaci)).EndInit();
