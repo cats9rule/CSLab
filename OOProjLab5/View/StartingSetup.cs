@@ -19,6 +19,7 @@ namespace CardGame.View
         {
             InitializeComponent();
         }
+
         public StartingSetup(ref GameController c) 
             : this()
         {

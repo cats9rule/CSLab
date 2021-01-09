@@ -18,7 +18,6 @@ namespace CardGame.Model
 
     public class Card : IComparable
     {
-
         #region Attributes
 
         private string number;
@@ -245,6 +244,7 @@ namespace CardGame.Model
             }
             else return false;
         }
+
         private bool LoadFrontImage()
         {
             // based on the name of the card

@@ -311,7 +311,7 @@ namespace CardGame.Controller
             }
             return isFlush;
         }
-        private bool IsStraight() // i am not
+        private bool IsStraight()
         {
             hand = SortHandByValue();
             int low = hand[0].Value;
@@ -442,7 +442,5 @@ namespace CardGame.Controller
         #endregion
 
         #endregion
-
-
     }
 }
