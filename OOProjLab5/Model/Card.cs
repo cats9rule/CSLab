@@ -18,7 +18,6 @@ namespace CardGame.Model
 
     public class Card : IComparable
     {
-        public static int MaxCards = 52;
 
         #region Attributes
 
@@ -43,22 +42,21 @@ namespace CardGame.Model
                     {
                         number = value;
                     }
-                    else if(val==1 || val == 11)
-                    {
-                        number = "A";
-                    }
                     else
                     {
                         switch (val)
                         {
-                            case 12:
+                            case 11:
                                 number = "J";
                                 break;
-                            case 13:
+                            case 12:
                                 number = "Q";
                                 break;
-                            case 14:
+                            case 13:
                                 number = "K";
+                                break;
+                            case 14:
+                                number = "A";
                                 break;
                             default:
                                 number = "K";
@@ -92,17 +90,14 @@ namespace CardGame.Model
         public SignEnum Sign
         {
             get { return sign; }
-            set { sign = value; }
         }
         public Image ImgFront
         {
             get { return imgFront; }
-            set { imgFront = value; }
         }
         public Image ImgBack
         {
             get { return imgBack; }
-            set { imgBack = value; }
         }
         public string CardName
         {
@@ -215,17 +210,19 @@ namespace CardGame.Model
 
         public Card(string num, SignEnum sgn, string colour)
         {
-            if(MaxCards > 0)
-            {
-                // moze da se kreira karta
-                MaxCards--;
+            Number = num;
+            sign = sgn;
 
-                Number = num;
-                sign = sgn;
-
-                LoadBackImage(colour);
-                LoadFrontImage();
-            }
+            LoadBackImage(colour);
+            LoadFrontImage();
+        }
+        
+        public Card(Card c)
+        {
+            number = c.Number;
+            sign = c.Sign;
+            imgFront = c.ImgFront;
+            imgBack = c.ImgBack;
         }
 
         #endregion
@@ -251,7 +248,7 @@ namespace CardGame.Model
         private bool LoadFrontImage()
         {
             // based on the name of the card
-            string path = "../CardSprites/" + CardName;
+            string path = "../../../CardSprites/" + CardName + ".png";
             if (File.Exists(path))
             {
                 imgFront = Image.FromFile(path);

@@ -7,23 +7,38 @@ using CardGame.Model;
 
 namespace CardGame.Controller
 {
-    class GameController
+    public class GameController
     {
         #region Attributes
 
         private Deck deck;
         private List<Card> hand;
+        private List<bool> selectedCards;
+        private int selectedCount;
 
         private int points;
         private int bettingPoints;
 
         #endregion
 
-        #region Attributes
+        #region Properties
 
+        public Deck Deck
+        {
+            get { return deck; }
+        }
         public List<Card> Hand
         {
             get { return hand; }
+        }
+        public List<bool> SelectedCards
+        {
+            get { return selectedCards; }
+        }
+        public int SelectedCount
+        {
+            get { return selectedCount; }
+            set { selectedCount = value; }
         }
         public int Points
         {
@@ -34,6 +49,7 @@ namespace CardGame.Controller
             get { return bettingPoints; }
             set { if (value <= points) bettingPoints = value; }
         }
+        
         public string StringRepresentation
         {
             get
@@ -50,12 +66,24 @@ namespace CardGame.Controller
         public GameController()
         {
             hand = new List<Card>();
+            selectedCards = new List<bool>(5);
+            for(int i = 0; i < 5; i++)
+            {
+                selectedCards.Add(false);
+            }
+            selectedCount = 0;
             points = 0;
             bettingPoints = 0;
         }
         public GameController(int points)
         {
             hand = new List<Card>();
+            selectedCards = new List<bool>(5);
+            for (int i = 0; i < 5; i++)
+            {
+                selectedCards.Add(false);
+            }
+            selectedCount = 0;
             this.points = points;
             bettingPoints = 0;
         }
@@ -63,6 +91,27 @@ namespace CardGame.Controller
         #endregion
 
         #region Methods
+
+        public void ResetGame()
+        {
+            ResetSelection();
+            hand.Clear();
+            deck.Shuffle();
+            points = 0;
+            bettingPoints = 0;
+        }
+        public void ResetHand()
+        {
+            ResetSelection();
+            hand.Clear();
+            if(deck.DeckCount < 5)
+            {
+                string col = deck.Colour;
+                deck = new Deck(col);
+            }
+            deck.Shuffle();
+            bettingPoints = 0;
+        }
 
         #region Deck
         public void CreateDeck()
@@ -83,18 +132,44 @@ namespace CardGame.Controller
                 hand.Add(deck.PullCard());
             }
         }
-        public void ReplaceCard(int index)
+
+        private void ReplaceCard(int index)
         {
             Card replacement = deck.PullCard();
             deck.ReturnCard(hand[index]);
             hand[index] = replacement;
         }
+
+        public void ReplaceSelectedCards()
+        {
+            for(int i = 0; i < 5; i++)
+            {
+                if (selectedCards[i])
+                {
+                    ReplaceCard(i);
+                }
+            }
+        }
+
+        public void ResetSelection()
+        {
+            if(selectedCount > 0)
+            {
+                for(int i = 0; i < 5; i++)
+                {
+                    selectedCards[i] = false;
+                }
+                selectedCount = 0;
+            }
+        }
+
         public List<Card> GetSortedHand()
         {
             List<Card> sorted = new List<Card>(hand);
             sorted.Sort();
             return sorted;
         }
+
         public List<Card> SortHandByValue()
         {
             List<Card> sorted = new List<Card>(hand);
@@ -113,9 +188,29 @@ namespace CardGame.Controller
             }
             else return false;
         }
-        public void UpdatePoints()
+
+        public void UpdatePoints(out int multiplier)
         {
-            points += bettingPoints * ComboMultiplier();
+            multiplier = ComboMultiplier();
+            points += bettingPoints * multiplier;
+        }
+
+        public void PlaceBet(int betAmount)
+        {
+            bettingPoints = betAmount;
+            points -= betAmount;
+        }
+
+        public void SetPoints(int points)
+        {
+            if(points <= 1000000 && points > 0)
+            {
+                this.points = points;
+            }
+            else
+            {
+                this.points = 0;
+            }
         }
         #endregion
 
@@ -162,6 +257,15 @@ namespace CardGame.Controller
             }
             else
             {
+                if (IsBlaze())
+                {
+                    return 9;
+                }
+                else if (IsStraight())
+                {
+                    return 12;
+                }
+
                 bool ind;
                 if(IsFourOrThreeOfAKind(out ind))
                 {
@@ -188,26 +292,18 @@ namespace CardGame.Controller
                 }
             }
 
-            // if nothing reached return statement, then it may be blaze, straight or nothing
-            if (IsBlaze())
-            {
-                return 9;
-            }
-            else if (IsStraight())
-            {
-                return 12;
-            }
-            else return 1;
+            // if nothing reached return statement, then its an empty hand
+            
+            return 0;
         }
 
         private bool IsFlush()
         {
             bool isFlush = true;
-            string hand = StringRepresentation;
-            for(int i = 1; i < 9; i += 2)
+            for(int i = 0; i < 4; i ++)
             {
                 // check if all cards are in the same suit
-                if(hand[i] != hand[i + 2])
+                if(hand[i].Sign != hand[i + 1].Sign)
                 {
                     isFlush = false;
                     break;
@@ -273,38 +369,18 @@ namespace CardGame.Controller
             /* priority: 4 of a kind > 3 of a kind 
              * if 3 of a kind is true, needs to be checked for full house 
              */
-
             hand = SortHandByValue();
-            string h = StringRepresentation;
-            int count = 0;
-            int ind = 0;
-            if(h[0] != h[2])
+            threeOfAKind = false;
+            for(int i = 0; i < 3; i++)
             {
-                if(h[2] == h[4])
+                if(hand[i].Value == hand[i+1].Value && hand[i].Value == hand[i + 2].Value)
                 {
-                    ind = 2;
+                    threeOfAKind = true;
+                    if (i + 3 < 5 && hand[i].Value == hand[i + 3].Value)
+                        return true;
                 }
             }
-            for(int i = ind; i < 8; i += 2)
-            {
-                if (h[i] == h[i + 2]) // its sorted by value so this works
-                    count++;
-            }
-            if(count == 3)
-            {
-                threeOfAKind = true;
-                return false;
-            }
-            else if(count == 4)
-            {
-                threeOfAKind = false;
-                return true;
-            }
-            else
-            {
-                threeOfAKind = false;
-                return false;
-            }
+            return false;
         }
         private bool IsTwoPair(out bool onePair)
         {
@@ -345,34 +421,28 @@ namespace CardGame.Controller
         {
             if (!foundThree)
             {
-                hand = SortHandByValue();
+                this.hand = SortHandByValue();
             }
-            string cards = hand[0].Number + hand[1].Number + hand[2].Number + hand[3].Number + hand[4].Number;
-            // its sorted, so if there is a flush, its either XXYYY of YYYXX format
-            if(cards[0] != cards[1])
+            // its sorted, so if there is a full house, its either XXYYY of YYYXX format
+
+            if (hand[0].Value == hand[1].Value &&
+                hand[2].Value == hand[3].Value &&
+                hand[2].Value == hand[4].Value)
             {
-                // cant possibly be a flush
-                return false;
+                return true;
             }
-            if(cards[1] != cards[2])
+            else if (hand[0].Value == hand[1].Value &&
+                hand[0].Value == hand[2].Value &&
+                hand[3].Value == hand[4].Value)
             {
-                if(cards[2] == cards[3] && cards[3] == cards[4])
-                {
-                    return true;
-                }
-                return false;
+                return true;
             }
-            else
-            {
-                if(cards[3] == cards[4])
-                {
-                    return true;
-                }
-                return false;
-            }
+            else return false;
         }
         #endregion
 
         #endregion
+
+
     }
 }

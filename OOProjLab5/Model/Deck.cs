@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CardGame.Model
 {
@@ -33,6 +30,15 @@ namespace CardGame.Model
         {
             get { return colour; }
             set { colour = value; }
+        }
+        public Random Rng
+        {
+            get { return rng; }
+            set { rng = value; }
+        }
+        public int DeckCount
+        {
+            get { return deck.Count; }
         }
 
         #endregion
@@ -79,11 +85,40 @@ namespace CardGame.Model
             }
         }
         
-        public Deck(string colour)
+        public Deck(string col)
         {
             // sets specified colour
-
-            this.colour = colour;
+            if(col == "random")
+            {
+                rng = new Random(DateTime.Now.Millisecond);
+                int num = rng.Next() % 6;
+                switch (num)
+                {
+                    case 0:
+                        colour = "red";
+                        break;
+                    case 1:
+                        colour = "green";
+                        break;
+                    case 2:
+                        colour = "blue";
+                        break;
+                    case 3:
+                        colour = "yellow";
+                        break;
+                    case 4:
+                        colour = "purple";
+                        break;
+                    case 5:
+                        colour = "gray";
+                        break;
+                }
+            }
+            else
+            {
+                colour = col;
+            }
+            
 
             // creating the deck
 
@@ -91,11 +126,12 @@ namespace CardGame.Model
 
             for (int i = 2; i <= 14; i++)
             {
-                deck[i] = new Card(i.ToString(), SignEnum.SPADES, colour);
-                deck[i] = new Card(i.ToString(), SignEnum.HEARTS, colour);
-                deck[i] = new Card(i.ToString(), SignEnum.CLUBS, colour);
-                deck[i] = new Card(i.ToString(), SignEnum.DIAMONDS, colour);
+                deck.Add(new Card(i.ToString(), SignEnum.SPADES, colour));
+                deck.Add(new Card(i.ToString(), SignEnum.HEARTS, colour));
+                deck.Add(new Card(i.ToString(), SignEnum.CLUBS, colour));
+                deck.Add(new Card(i.ToString(), SignEnum.DIAMONDS, colour));
             }
+            rng = new Random(DateTime.Now.Millisecond);
         }
 
         #endregion
@@ -106,7 +142,7 @@ namespace CardGame.Model
         {
             // Knuth shuffle
             
-            for(int i = 51; i > 0; i--)
+            for(int i = deck.Count - 1; i > 0; i--)
             {
                 int ind = rng.Next(i + 1);
                 Card temp = deck[ind];
@@ -125,7 +161,8 @@ namespace CardGame.Model
         {
             if (!deck.Contains(c))
             {
-                deck.Add(c);
+                Card card = new Card(c);
+                deck.Add(card);
             }
             else throw new Exception("Card already in deck!");
         }

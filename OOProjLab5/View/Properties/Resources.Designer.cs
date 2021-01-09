@@ -59,15 +59,5 @@ namespace View.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap pexels_elviss_railijs_bitāns_1389429 {
-            get {
-                object obj = ResourceManager.GetObject("pexels-elviss-railijs-bitāns-1389429", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
     }
 }

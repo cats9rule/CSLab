@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{063C1BC5-36BB-4B1C-A1BA-1F7F8DF603AC}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <RootNamespace>View</RootNamespace>
-    <AssemblyName>View</AssemblyName>
+    <ProjectGuid>{14B3E633-12EA-496C-8BBC-726BB5039AAF}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Program</RootNamespace>
+    <AssemblyName>Program</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -39,52 +39,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BetSetup.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="BetSetup.Designer.cs">
-      <DependentUpon>BetSetup.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GameForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GameForm.Designer.cs">
-      <DependentUpon>GameForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="StartingSetup.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="StartingSetup.Designer.cs">
-      <DependentUpon>StartingSetup.cs</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="BetSetup.resx">
-      <DependentUpon>BetSetup.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GameForm.resx">
-      <DependentUpon>GameForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="StartingSetup.resx">
-      <DependentUpon>StartingSetup.cs</DependentUpon>
-    </EmbeddedResource>
+    <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Controller\Controller.csproj">
@@ -95,9 +50,14 @@
       <Project>{7d9ee3d0-7b34-43a4-87ad-6363cca68ba4}</Project>
       <Name>Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\View\View.csproj">
+      <Project>{063c1bc5-36bb-4b1c-a1ba-1f7f8df603ac}</Project>
+      <Name>View</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\" />
+    <Reference Include="System" />
+    <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

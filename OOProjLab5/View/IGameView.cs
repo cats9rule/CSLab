@@ -8,9 +8,6 @@ namespace CardGame.View
 {
     public interface IGameView
     {
-        void ShowCard();
         void DisplayDeck();
-
-
     }
 }
